@@ -17,7 +17,6 @@ var H = {
                         x_i = center[0] + size * Math.cos(angle)
                         y_i = center[1] + size * Math.sin(angle)
                         if (i == 0)
-                            // position = [x_i, y_i]
                             coordinates.push([x_i, y_i])
                         else
                             coordinates.push([x_i, y_i])
@@ -48,7 +47,6 @@ var H = {
 
         for(var k=0; k<cols;k++){
            horiz = 3/4 * width * k;
-           // (HT.Hexagon.Static.WIDTH - HT.Hexagon.Static.SIDE)/2 + HT.Hexagon.Static.SIDE;
            var offset = 0.0;
 
            if( k % 2 == 1){
@@ -57,10 +55,9 @@ var H = {
 
            for(var l =0; l< lines;l++){
                 newCenter = [center[0] + horiz, (center[1] + offset) + (vert*l) ]
-                features.push(hexagonalGrid(newCenter, size, k+','+l));
+                features.push(this.hexagon(newCenter, size, k+','+l));
            }
         }
-        console.log(features)
         return {'type':'FeatureCollection','features':features};
     }
 }

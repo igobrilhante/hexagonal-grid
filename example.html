@@ -1,0 +1,134 @@
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hexagonal Grid Example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Igo Brilhante">
+
+<link rel="stylesheet"    href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+<script src="./hexagonalgrid.js"></script>
+<style>
+            #map {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+
+            .over-map {
+                z-index: 99;
+            }
+
+            .header {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 50px;
+                background-color: rgba(255,255,255,0.7);
+            }
+
+            .title{
+                left: 50px;
+                top: 12px;
+                font-size: xx-large;
+                position: absolute;
+            }
+
+            #form {
+                left: 300px;
+                top: 5px;
+                /*font-size: xx-large;*/
+                position: absolute;
+            }
+
+            .leaflet-top .leaflet-control{
+                margin-top: 60px;
+            }
+        </style>
+
+<script>
+        GUEST = "http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg"
+</script>
+
+</head>
+<body>
+        <div id="header" class="over-map header">
+            <div class="title">TripBuilder</div>
+            <form id="form" class="form-search">
+                <input type="text" id="input" class="input-medium search-query">
+                <button type="submit" id="button" class="btn">Search</button>
+            </form>
+        </div>
+        <div id="map"></div>
+
+            <script>
+
+                var map = L.map('map').setView([43.72166389,10.39539444], 14);
+                var popup = null
+
+                L.tileLayer(GUEST, {attribution: '', styleId: 997}).addTo(map);
+
+
+                function highlightFeature(e) {
+                    var layer = e.target;
+
+                    layer.setStyle({
+                        weight: 5,
+                        color: '#666',
+                        dashArray: '',
+                        fillOpacity: 0.7
+                    });
+
+                    if (!L.Browser.ie && !L.Browser.opera) {
+                        layer.bringToFront();
+                    }
+                }
+
+                function resetHighlight(e) {
+                    geojson.resetStyle(e.target);
+                }
+
+                function click(e) {
+                    popup = L.popup()
+                                    .setLatLng(e.latlng)
+                                    .setContent("Hexagon ID: "+e.target.feature.properties.id)
+                                    .openOn(map);
+                }
+
+                function onEachFeature(feature, layer) {
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight,
+                        click: click
+                    });
+                }
+
+                function style(feature) {
+                    return {
+                        fillColor: 'blue',
+                        weight: 2,
+                        opacity: 1,
+                        color: 'white',
+                        dashArray: '3',
+                        fillOpacity: 0.5
+                    };
+                }
+
+
+
+
+                grid = H.hexagonalGrid([10.39466389,43.72234167],5,2, 0.008);
+
+
+                var geojson = L.geoJson(grid, {
+                                    style: style,
+                                    onEachFeature: onEachFeature
+                }).addTo(map);
+            </script>
+</body>
+</html>
