@@ -62,12 +62,3 @@ var H = {
     }
 }
 
-                // var g = several([10.39466389,43.72234167],50,50, 0.008)
-                // L.geoJson(g, {
-                //                     style: style,
-                //                     onEachFeature: function(feature, layer){
-                //                         if( feature.properties && feature.properties.id){
-                //                             layer.bindPopup('ID '+feature.properties.id);
-                //                         }
-                //                     }
-                //             }).addTo(map);

@@ -23,28 +23,6 @@
                 z-index: 99;
             }
 
-            .header {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 50px;
-                background-color: rgba(255,255,255,0.7);
-            }
-
-            .title{
-                left: 50px;
-                top: 12px;
-                font-size: xx-large;
-                position: absolute;
-            }
-
-            #form {
-                left: 300px;
-                top: 5px;
-                /*font-size: xx-large;*/
-                position: absolute;
-            }
 
             .leaflet-top .leaflet-control{
                 margin-top: 60px;
@@ -57,13 +35,7 @@
 
 </head>
 <body>
-        <div id="header" class="over-map header">
-            <div class="title">TripBuilder</div>
-            <form id="form" class="form-search">
-                <input type="text" id="input" class="input-medium search-query">
-                <button type="submit" id="button" class="btn">Search</button>
-            </form>
-        </div>
+
         <div id="map"></div>
 
             <script>
